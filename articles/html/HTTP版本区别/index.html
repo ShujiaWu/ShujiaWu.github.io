@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="shujia.wu,wushujia@vip.qq.com"><title>HTTP版本却别 · Yun's Blog</title><meta name="description" content="HTTP1.0、HTTP1.1 和 HTTP2.0 的区别
+超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。
+
+HTTP 各版"><meta name="keywords" content="Hexo,HTML,CSS,JS,JavaScript,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Yun's Blog</a></h3><div class="description"><p>程序猿一只，求打包带走.</p></div></div></div><ul class="social-links"><li><a href="http://github.com/ShujiaWu"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>HTTP版本却别</a></h3></div><div class="post-content"><h1 id="HTTP1-0、HTTP1-1-和-HTTP2-0-的区别"><a href="#HTTP1-0、HTTP1-1-和-HTTP2-0-的区别" class="headerlink" title="HTTP1.0、HTTP1.1 和 HTTP2.0 的区别"></a>HTTP1.0、HTTP1.1 和 HTTP2.0 的区别</h1><blockquote>
+<p>超文本传输协议（HTTP，HyperText Transfer Protocol)是互联网上应用最为广泛的一种网络协议。所有的WWW文件都必须遵守这个标准。设计HTTP最初的目的是为了提供一种发布和接收HTML页面的方法。</p>
+</blockquote>
+<h2 id="HTTP-各版本发布时间"><a href="#HTTP-各版本发布时间" class="headerlink" title="HTTP 各版本发布时间"></a>HTTP 各版本发布时间</h2><p>1991  ==&gt;  HTTP/0.9</p>
+<p>1996  ==&gt;  HTTP/1.0</p>
+<p>1999  ==&gt;  HTTP/1.1</p>
+<p>2015  ==&gt;  HTTP/2.0</p>
+<h2 id="HTTP的基本优化"><a href="#HTTP的基本优化" class="headerlink" title="HTTP的基本优化"></a>HTTP的基本优化</h2><p>影响一个 HTTP请求的因素主要有两个: <strong>带宽</strong> 和 <strong>延迟</strong>。</p>
+<p>带宽：即网络传输速率。</p>
+<p>延迟：</p>
+<ul>
+<li><p>浏览器阻塞</p>
+<p>  浏览器对于同一个域名，同时只能有 4 个连接（不同浏览器内核会有所差异），超过浏览器最大连接数限制，后续请求就会被阻塞。</p>
+</li>
+<li><p>DNS查询</p>
+<p>  域名需要通过DNS解析成IP，浏览器才能与服务器建立连接。通过缓存DNS解析结果来减少这个查询的时间。</p>
+</li>
+<li><p>建立连接</p>
+<p>  HTTP是基于TCP协议的，TCP连接需要三次握手才能完成。每次的三次握手过程在高延迟场景下影响较明显。</p>
+</li>
+</ul>
+<h2 id="HTTP1-0-和HTTP-1-1-的区别"><a href="#HTTP1-0-和HTTP-1-1-的区别" class="headerlink" title="HTTP1.0 和HTTP 1.1 的区别"></a>HTTP1.0 和HTTP 1.1 的区别</h2><ul>
+<li><p>缓存处理</p>
+<p>  HTTP 1.0 : 使用If-Modified-Since,Expires来做为缓存判断的标准。</p>
+<p>  HTTP 1.1 : 引入了更多的缓存空中策略,Entity tag，If-Unmodified-Since, If-Match, If-None-Match。</p>
+</li>
+<li><p>带宽优化及网络连接的使用</p>
+<p>  HTTP 1.0 : 存在带宽浪费现象,只能获取完整的资源对象,不支持断点续传。</p>
+<p>  HTTP 1.1 : 引入了rang头域,允许返回资源对象的某个部分,状态码为206(partial Content)。</p>
+</li>
+<li><p>错误通知的管理:</p>
+<p>  HTTP 1.1 : 新增了24个错误状态响应码。</p>
+</li>
+<li><p>Host头处理</p>
+<p>  HTTP 1.0 : 认为每台服务器都绑定一个唯一的IP地址。</p>
+<p>  HTTP 1.1 : 请求消息和响应消息都支持Host头域，如果没有Host则会报告一个错误（400 Bad Request），支持一台服务器上存在多个虚拟主机。</p>
+</li>
+<li><p>长连接</p>
+<p>  HTTP 1.0 : 不支持长连接</p>
+<p>  HTTP 1.1 : 支持长连接（PersistentConnection）和请求流水线（Pipelining）处理，在一个TCP连接上可以传送多个HTTP请求和响应，减少建立和关闭连接的消耗和延迟。默认状态下是开启<code>Connection:keep-alive</code>。</p>
+</li>
+</ul>
+<h2 id="HTTP-和-HTTPS"><a href="#HTTP-和-HTTPS" class="headerlink" title="HTTP 和 HTTPS"></a>HTTP 和 HTTPS</h2><ul>
+<li>HTTPS 需要到 CA 申请证书</li>
+<li>HTTP协议运行在TCP之上，所有传输的内容都是明文，HTTPS运行在SSL/TLS之上，SSL/TLS运行在TCP之上，所有传输的内容都经过加密的。</li>
+<li>HTTP和HTTPS使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>HTTPS可以有效的防止运营商劫持，解决了防劫持的一个大问题。</li>
+</ul>
+<p><strong>HTTP :</strong> HTTP –&gt; TCP</p>
+<p><strong>HTTPS :</strong> HTTP –&gt; SSL/TLS –&gt; TCP</p>
+<h2 id="SPDY-HTTP-1-x的优化"><a href="#SPDY-HTTP-1-x的优化" class="headerlink" title="SPDY : HTTP 1.x的优化"></a>SPDY : HTTP 1.x的优化</h2><p><code>SPDY</code> 是google在2012年提出的方案用于优化HTTP 1.x请求延迟和解决HTTP 1.x的安全性。</p>
+<ul>
+<li><p>降低延迟</p>
+<p>  采用 <code>多路复合(multiplexing)</code>,让多个请求共享一个TCP连接.解决浏览器阻塞的问题,降低延迟提高带宽利用率.</p>
+</li>
+<li><p>请求优先级</p>
+<p>  SPDY允许对每个请求设置优先级,对重要的请求优先响应,用于解决多路复合带来的关键请求呗阻塞的问题.</p>
+</li>
+<li><p>header压缩</p>
+<p>  对header进行压缩减少请求时的包大小.</p>
+</li>
+<li><p>基于HTTPS的加密传输协议</p>
+<p>  提高数据传输的可靠性</p>
+</li>
+<li><p>服务端推送</p>
+<p>  服务端可以在一个请求后将相应的其他的资源推送给客户端,客户端在下次请求时可以直接从缓存中获取到。</p>
+</li>
+</ul>
+<p>HTTP –&gt; SPDY –&gt; SSL –&gt; TCP</p>
+<h2 id="HTTP-2-0-SPDY的升级版"><a href="#HTTP-2-0-SPDY的升级版" class="headerlink" title="HTTP 2.0 : SPDY的升级版"></a>HTTP 2.0 : SPDY的升级版</h2><ul>
+<li><p>HTTP 2.0 支持明文 HTTP 传输， SPDY 强制使用 HTTPS</p>
+</li>
+<li><p>HTTP 2.0 消息头的压缩算法是 <code>HPACK</code>, SPDY使用的是<code>DEFLATE</code>。</p>
+</li>
+</ul>
+<h2 id="HTTP-2-0-和-HTTP-1-x的比较"><a href="#HTTP-2-0-和-HTTP-1-x的比较" class="headerlink" title="HTTP 2.0 和 HTTP 1.x的比较"></a>HTTP 2.0 和 HTTP 1.x的比较</h2><ul>
+<li><p>新的二进制格式：HTTP 1.x 的解析是基于文本。HTTP 2.0 是基于二进制的。</p>
+</li>
+<li><p>多路复用：即连接共享，即每一个request都是使用作连接共享机制的。一个request对应一个id，这样一个连接上可以有多个request，每个连接的request可以随机的混杂在一起，接收方可以根据request的 id将request再归属到各自不同的服务端请求里面。</p>
+</li>
+<li><p>header压缩：HTTP2.0使用encoder来减少需要传输的header大小，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
+</li>
+<li><p>服务器推送：HTTP 2.0 具有与SPDY一样的服务器推送功能。</p>
+</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2017-08-03</span><i class="fa fa-tag"></i><a href="/categories/html/" title="html" class="tag">html </a><a href="/tags/HTTP/" title="HTTP" class="tag">HTTP </a><a href="/tags/HTTP1-0/" title="HTTP1.0" class="tag">HTTP1.0 </a><a href="/tags/HTTP2-0/" title="HTTP2.0" class="tag">HTTP2.0 </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.wushujia.cn/articles/html/HTTP版本区别/,Yun's Blog,HTTP版本却别,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/articles/hexo/004-Hexo集成gitment/" title="Hexo 集成 Gitment" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/articles/npm/002-npm常用命令/" title="npm常用命令" class="btn">下一篇</a></li></ul></div><div id="container" style="padding:30px" class="container"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>(function() {
+    var gitment = new Gitment({
+        owner: 'ShujiaWu',
+        repo: 'ShujiaWu.github.io',
+        oauth: {
+            client_id: 'e87a36369b1bed79f408',
+            client_secret: '672bb0956ec56c2634d20fcb4a06b65ddabc6fae',
+        },
+    })
+    gitment.render('container')
+})();</script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
