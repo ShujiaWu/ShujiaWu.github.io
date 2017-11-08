@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="shujia.wu,wushujia@vip.qq.com"><title>数据类型 · Yun's Blog</title><meta name="description" content="数据类型
+Redis 支持一下五种数据类型：
+
+string（字符串）
+hash（哈希）
+list（列表）
+set（集合）
+zset(sorted set：有序集合)
+
+
+String 字符串字符串类型一个key对应一个value
+string类型是二进制安全的。可以包含任意的数据，包括序列化的对象"><meta name="keywords" content="Hexo,HTML,CSS,JS,JavaScript,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Yun's Blog</a></h3><div class="description"><p>程序猿一只，求打包带走.</p></div></div></div><ul class="social-links"><li><a href="http://github.com/ShujiaWu"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>数据类型</a></h3></div><div class="post-content"><h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><blockquote>
+<p>Redis 支持一下五种数据类型：</p>
+<ol>
+<li>string（字符串）</li>
+<li>hash（哈希）</li>
+<li>list（列表）</li>
+<li>set（集合）</li>
+<li>zset(sorted set：有序集合)</li>
+</ol>
+</blockquote>
+<h2 id="String-字符串"><a href="#String-字符串" class="headerlink" title="String 字符串"></a>String 字符串</h2><p>字符串类型一个key对应一个value</p>
+<p>string类型是二进制安全的。可以包含任意的数据，包括序列化的对象、图片等。</p>
+<p>一个键最大能存储512MB的数据。</p>
+<p>通过 <code>GET</code> <code>SET</code> 进行操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">192.168.204.130:6379&gt; <span class="built_in">set</span> name wsj</div><div class="line">OK</div><div class="line">192.168.204.130:6379&gt; get name</div><div class="line"><span class="string">"wsj"</span></div></pre></td></tr></table></figure>
+<p>常用的 String 命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SET key value</td>
+<td>设置指定 key 的值</td>
+</tr>
+<tr>
+<td>GET key</td>
+<td>获取指定 key 的值</td>
+</tr>
+<tr>
+<td>GETRANGE key start end</td>
+<td>返回 key 中字符串值的子字符</td>
+</tr>
+<tr>
+<td>GETSET key value</td>
+<td>将给定 key 的值设为 value ，并返回 key 的旧值(old value)</td>
+</tr>
+<tr>
+<td>GETBIT key offset</td>
+<td>对 key 所储存的字符串值，获取指定偏移量上的位(bit)【有什么作用？】</td>
+</tr>
+<tr>
+<td>MGET key1 [key2..]</td>
+<td>获取所有(一个或多个)给定 key 的值</td>
+</tr>
+<tr>
+<td>SETBIT key offset value</td>
+<td>对 key 所储存的字符串值，设置或清除指定偏移量上的位(bit)</td>
+</tr>
+<tr>
+<td>SETEX key seconds value</td>
+<td>将值 value 关联到 key ，并将 key 的过期时间设为 seconds (以秒为单位)</td>
+</tr>
+<tr>
+<td>SETNX key value</td>
+<td>只有在 key 不存在时设置 key 的值</td>
+</tr>
+<tr>
+<td>SETRANGE key offset value</td>
+<td>用 value 参数覆写给定 key 所储存的字符串值，从偏移量 offset 开始</td>
+</tr>
+<tr>
+<td>STRLEN key</td>
+<td>返回 key 所储存的字符串值的长度</td>
+</tr>
+<tr>
+<td>MSET key value [key value …]</td>
+<td>同时设置一个或多个 key-value 对</td>
+</tr>
+<tr>
+<td>PSETEX key milliseconds value</td>
+<td>以毫秒为单位设置 key 的生存时间</td>
+</tr>
+<tr>
+<td>INCR key</td>
+<td>将 key 中储存的数字值增一</td>
+</tr>
+<tr>
+<td>INCRBY key increment</td>
+<td>将 key 所储存的值加上给定的增量值（increment）</td>
+</tr>
+<tr>
+<td>INCRBYFLOAT key increment</td>
+<td>将 key 所储存的值加上给定的浮点增量值（increment）</td>
+</tr>
+<tr>
+<td>DECR key</td>
+<td>将 key 中储存的数字值减一</td>
+</tr>
+<tr>
+<td>DECRBY key decrement</td>
+<td>key 所储存的值减去给定的减量值（decrement）</td>
+</tr>
+<tr>
+<td>APPEND key value</td>
+<td>如果 key 已经存在并且是一个字符串， APPEND 命令将 value 追加到 key 原来的值的末尾</td>
+</tr>
+</tbody>
+</table>
+<p>表格来自<a href="http://www.runoob.com/redis/redis-strings.html" target="_blank" rel="external">www.runob.com</a>,仅做整理。</p>
+<h2 id="Hash-哈希"><a href="#Hash-哈希" class="headerlink" title="Hash 哈希"></a>Hash 哈希</h2><p>键名对集合</p>
+<p>Redis hash是一个string类型的field和value的映射表</p>
+<p>适合用于存储对象</p>
+<p>通过 <code>HMSET</code> <code>HGET</code> <code>HGETALL</code>等操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">192.168.204.130:6379&gt; hmset user:1 name wsj age 27 gender man</div><div class="line">OK</div><div class="line">192.168.204.130:6379&gt; hgetall user:1</div><div class="line">1) <span class="string">"name"</span></div><div class="line">2) <span class="string">"wsj"</span></div><div class="line">3) <span class="string">"age"</span></div><div class="line">4) <span class="string">"27"</span></div><div class="line">5) <span class="string">"gender"</span></div><div class="line">6) <span class="string">"man"</span></div><div class="line">192.168.204.130:6379&gt; hget user:1 name</div><div class="line"><span class="string">"wsj"</span></div></pre></td></tr></table></figure>
+<p>hash 可以存储 232 -1 键值对</p>
+<p>常用 hash 命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDEL key field1 [field2 …]</td>
+<td>删除一个或多个哈希表字段</td>
+</tr>
+<tr>
+<td>HEXISTS key field</td>
+<td>查看哈希表 key 中，指定的字段是否存在</td>
+</tr>
+<tr>
+<td>HGET key field</td>
+<td>获取存储在哈希表中指定字段的值</td>
+</tr>
+<tr>
+<td>HGETALL key</td>
+<td>获取在哈希表中指定 key 的所有字段和值</td>
+</tr>
+<tr>
+<td>HINCRBY key field increment</td>
+<td>为哈希表 key 中的指定字段的整数值加上增量 increment</td>
+</tr>
+<tr>
+<td>HINCRBYFLOAT key field increment</td>
+<td>为哈希表 key 中的指定字段的浮点数值加上增量 increment </td>
+</tr>
+<tr>
+<td>HKEYS key</td>
+<td>获取所有哈希表中的字段</td>
+</tr>
+<tr>
+<td>HLEN key</td>
+<td>获取哈希表中字段的数量</td>
+</tr>
+<tr>
+<td>HMGET key field1 [field2 …]</td>
+<td>获取所有给定字段的值</td>
+</tr>
+<tr>
+<td>HMSET key field1 value1 [field2 value2 …]</td>
+<td>同时将多个 field-value (域-值)对设置到哈希表 key 中</td>
+</tr>
+<tr>
+<td>HSET key field value</td>
+<td>将哈希表 key 中的字段 field 的值设为 value</td>
+</tr>
+<tr>
+<td>HSETNX key field value</td>
+<td>只有在字段 field 不存在时，设置哈希表字段的值</td>
+</tr>
+<tr>
+<td>HVALS key</td>
+<td>获取哈希表中所有值</td>
+</tr>
+<tr>
+<td>HSCAN key cursor [MATCH pattern] [COUNT count]</td>
+<td>迭代哈希表中的键值对 【这个不理解？】</td>
+</tr>
+</tbody>
+</table>
+<p>表格来自<a href="http://www.runoob.com/redis/redis-hashes.html" target="_blank" rel="external">www.runob.com</a>,仅做整理。</p>
+<h2 id="List-列表"><a href="#List-列表" class="headerlink" title="List 列表"></a>List 列表</h2><p>列表是简单的字符串列表，按照插入顺序排列。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">192.168.204.130:6379&gt; lpush list value1 value2 value3</div><div class="line">(<span class="built_in">integer</span>) 3</div><div class="line">192.168.204.130:6379&gt; lrange list 1 2</div><div class="line">1) <span class="string">"value2"</span></div><div class="line">2) <span class="string">"value1"</span></div></pre></td></tr></table></figure>
+<p>lsit 常用命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLPOP key1 [key2 …] timeout</td>
+<td>移出并获取列表的第一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止</td>
+</tr>
+<tr>
+<td>BRPOP key1 [key2 …] timeout</td>
+<td>移出并获取列表的最后一个元素， 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止</td>
+</tr>
+<tr>
+<td>BRPOPLPUSH source destination timeout</td>
+<td>从列表中弹出一个值，将弹出的元素插入到另外一个列表中并返回它； 如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止</td>
+</tr>
+<tr>
+<td>LINDEX key index</td>
+<td>通过索引获取列表中的元素</td>
+</tr>
+<tr>
+<td>LINSERT key BEFORE\</td>
+<td>AFTER EXISTING_VALUE NEW_VALUE</td>
+<td>在列表的元素前或者后插入元素</td>
+</tr>
+<tr>
+<td>LLEN key</td>
+<td>获取列表长度</td>
+</tr>
+<tr>
+<td>LPOP key</td>
+<td>移出并获取列表的第一个元素</td>
+</tr>
+<tr>
+<td>LPUSH key value1 [value2 …]</td>
+<td>将一个或多个值插入到列表头部</td>
+</tr>
+<tr>
+<td>LPUSHX key value</td>
+<td>将一个值插入到已存在的列表头部</td>
+</tr>
+<tr>
+<td>LRANGE key start stop</td>
+<td>获取列表指定范围内的元素</td>
+</tr>
+<tr>
+<td>LREM key count value</td>
+<td>移除列表元素<br>count &gt; 0 : 从表头开始向表尾搜索，移除与 VALUE 相等的元素，数量为 COUNT<br>count &lt; 0 : 从表尾开始向表头搜索，移除与 VALUE 相等的元素，数量为 COUNT 的绝对值<br>count = 0 : 移除表中所有与 VALUE 相等的值</td>
+</tr>
+<tr>
+<td>LSET key index value</td>
+<td>通过索引设置列表元素的值</td>
+</tr>
+<tr>
+<td>LTRIM key start stop</td>
+<td>对一个列表进行修剪(trim)，就是说，让列表只保留指定区间内的元素，不在指定区间之内的元素都将被删除。</td>
+</tr>
+<tr>
+<td>RPOP key</td>
+<td>移除并获取列表最后一个元素</td>
+</tr>
+<tr>
+<td>RPOPLPUSH source destination</td>
+<td>移除列表的最后一个元素，并将该元素添加到另一个列表并返回</td>
+</tr>
+<tr>
+<td>RPUSH key value1 [value2 …]</td>
+<td>在列表中添加一个或多个值</td>
+</tr>
+<tr>
+<td>RPUSHX key value</td>
+<td>为已存在的列表添加值</td>
+</tr>
+</tbody>
+</table>
+<p>表格来自<a href="http://www.runoob.com/redis/redis-lists.html" target="_blank" rel="external">www.runob.com</a>,仅做整理。</p>
+<h2 id="Set-集合"><a href="#Set-集合" class="headerlink" title="Set 集合"></a>Set 集合</h2><p>Set是String类型的无序集合</p>
+<p>添加一个string元素到,key对应的set集合中，成功返回1,如果元素已经在集合中返回0,key对应的set不存在返回错误。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">192.168.204.130:6379&gt; sadd <span class="built_in">set</span> value1</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; sadd <span class="built_in">set</span> value2</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; sadd <span class="built_in">set</span> value2</div><div class="line">(<span class="built_in">integer</span>) 0</div><div class="line">192.168.204.130:6379&gt; sadd <span class="built_in">set</span> value3</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; smembers <span class="built_in">set</span></div><div class="line">1) <span class="string">"value2"</span></div><div class="line">2) <span class="string">"value1"</span></div><div class="line">3) <span class="string">"value3"</span></div></pre></td></tr></table></figure>
+<p>set 常用命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SADD key member1 [member2 …]</td>
+<td>向集合添加一个或多个成员</td>
+</tr>
+<tr>
+<td>SCARD key</td>
+<td>获取集合的成员数</td>
+</tr>
+<tr>
+<td>SDIFF key1 [key2 …]</td>
+<td>返回给定所有集合的差集</td>
+</tr>
+<tr>
+<td>SDIFFSTORE destination key1 [key2 …]</td>
+<td>返回给定所有集合的差集并存储在 destination 中</td>
+</tr>
+<tr>
+<td>SINTER key1 [key2 …]</td>
+<td>返回给定所有集合的交集</td>
+</tr>
+<tr>
+<td>SINTERSTORE destination key1 [key2]</td>
+<td>返回给定所有集合的交集并存储在 destination 中</td>
+</tr>
+<tr>
+<td>SISMEMBER key member</td>
+<td>判断 member 元素是否是集合 key 的成员</td>
+</tr>
+<tr>
+<td>SMEMBERS key</td>
+<td>返回集合中的所有成员</td>
+</tr>
+<tr>
+<td>SMOVE source destination member</td>
+<td>将 member 元素从 source 集合移动到 destination 集合</td>
+</tr>
+<tr>
+<td>SPOP key</td>
+<td>移除并返回集合中的一个随机元素</td>
+</tr>
+<tr>
+<td>SRANDMEMBER key [count]</td>
+<td>返回集合中一个或多个随机数</td>
+</tr>
+<tr>
+<td>SREM key member1 [member2]</td>
+<td>移除集合中一个或多个成员</td>
+</tr>
+<tr>
+<td>SUNION key1 [key2 …]</td>
+<td>返回所有给定集合的并集</td>
+</tr>
+<tr>
+<td>SUNIONSTORE destination key1 [key2 …]</td>
+<td>所有给定集合的并集存储在 destination 集合中</td>
+</tr>
+<tr>
+<td>SSCAN key cursor [MATCH pattern] [COUNT count]</td>
+<td>迭代集合中的元素</td>
+</tr>
+</tbody>
+</table>
+<p>表格来自<a href="http://www.runoob.com/redis/redis-sets.html" target="_blank" rel="external">www.runob.com</a>,仅做整理。</p>
+<h2 id="zset-有序集合"><a href="#zset-有序集合" class="headerlink" title="zset 有序集合"></a>zset 有序集合</h2><p>zset 与 set 一样，不允许有重复的成员。</p>
+<p>zset 每一个元素都会关联一个double类型的分数，redis根据这个分数对每一个成员进行从小到大的排列。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">192.168.204.130:6379&gt; zadd zset 0 value</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; zadd zset 0 value0</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; zadd zset 0 value1</div><div class="line">(<span class="built_in">integer</span>) 1</div><div class="line">192.168.204.130:6379&gt; zrangebyscore zset 0 100</div><div class="line">1) <span class="string">"value"</span></div><div class="line">2) <span class="string">"value0"</span></div><div class="line">3) <span class="string">"value1"</span></div></pre></td></tr></table></figure>
+<p>zset 常用命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ZADD key score1 member1 [score2 member2]</td>
+<td>向有序集合添加一个或多个成员，或者更新已存在成员的分数</td>
+</tr>
+<tr>
+<td>ZCARD key</td>
+<td>获取有序集合的成员数</td>
+</tr>
+<tr>
+<td>ZCOUNT key min max</td>
+<td>计算在有序集合中指定区间分数的成员数</td>
+</tr>
+<tr>
+<td>ZINCRBY key increment member</td>
+<td>有序集合中对指定成员的分数加上增量 increment</td>
+</tr>
+<tr>
+<td>ZINTERSTORE destination numkeys key [key …]</td>
+<td>计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 key 中</td>
+</tr>
+<tr>
+<td>ZLEXCOUNT key min max</td>
+<td>在有序集合中计算指定字典区间内成员数量</td>
+</tr>
+<tr>
+<td>ZRANGE key start stop [WITHSCORES]</td>
+<td>通过索引区间返回有序集合成指定区间内的成员</td>
+</tr>
+<tr>
+<td>ZRANGEBYLEX key min max [LIMIT offset count]</td>
+<td>通过字典区间返回有序集合的成员</td>
+</tr>
+<tr>
+<td>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]</td>
+<td>通过分数返回有序集合指定区间内的成员</td>
+</tr>
+<tr>
+<td>ZRANK key member</td>
+<td>返回有序集合中指定成员的索引</td>
+</tr>
+<tr>
+<td>ZREM key member [member …]</td>
+<td>移除有序集合中的一个或多个成员</td>
+</tr>
+<tr>
+<td>ZREMRANGEBYLEX key min max</td>
+<td>移除有序集合中给定的字典区间的所有成员</td>
+</tr>
+<tr>
+<td>ZREMRANGEBYRANK key start stop</td>
+<td>移除有序集合中给定的排名区间的所有成员</td>
+</tr>
+<tr>
+<td>ZREMRANGEBYSCORE key min max</td>
+<td>移除有序集合中给定的分数区间的所有成员</td>
+</tr>
+<tr>
+<td>ZREVRANGE key start stop [WITHSCORES]</td>
+<td>返回有序集中指定区间内的成员，通过索引，分数从高到底</td>
+</tr>
+<tr>
+<td>ZREVRANGEBYSCORE key max min [WITHSCORES]</td>
+<td>返回有序集中指定分数区间内的成员，分数从高到低排序</td>
+</tr>
+<tr>
+<td>ZREVRANK key member</td>
+<td>返回有序集合中指定成员的排名，有序集成员按分数值递减(从大到小)排序</td>
+</tr>
+<tr>
+<td>ZSCORE key member</td>
+<td>返回有序集中，成员的分数值</td>
+</tr>
+<tr>
+<td>ZUNIONSTORE destination numkeys key [key …]</td>
+<td>计算给定的一个或多个有序集的并集，并存储在新的 key 中</td>
+</tr>
+<tr>
+<td>ZSCAN key cursor [MATCH pattern] [COUNT count]</td>
+<td>迭代有序集合中的元素（包括元素成员和元素分值）【这个不理解？】</td>
+</tr>
+</tbody>
+</table>
+<p>表格来自<a href="http://www.runoob.com/redis/redis-sorted-sets.html" target="_blank" rel="external">www.runob.com</a>,仅做整理。</p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2016-10-24</span><i class="fa fa-tag"></i><a href="/categories/redis/" title="redis" class="tag">redis </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.wushujia.cn/articles/redis/004.数据类型/,Yun's Blog,数据类型,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/articles/redis/005.基本操作/" title="基本操作" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/articles/redis/003.配置/" title="Redis配置" class="btn">下一篇</a></li></ul></div><div id="container" style="padding:30px" class="container"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>(function() {
+    var gitment = new Gitment({
+        owner: 'ShujiaWu',
+        repo: 'ShujiaWu.github.io',
+        oauth: {
+            client_id: 'e87a36369b1bed79f408',
+            client_secret: '672bb0956ec56c2634d20fcb4a06b65ddabc6fae',
+        },
+    })
+    gitment.render('container')
+})();</script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

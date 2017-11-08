@@ -1,0 +1,187 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="shujia.wu,wushujia@vip.qq.com"><title>Redis配置 · Yun's Blog</title><meta name="description" content="Redis配置通过修改配置文件修改配置
+配置文件以 .cong 结尾，可以直接修改配置文件来修改Redis的配置。
+
+通过命令查询、修改查询配置命令格式： CONFIG GET CONFIG_SETTING_NAME
+12345# 查询loglevel的配置192.168.204.130:6379&amp;"><meta name="keywords" content="Hexo,HTML,CSS,JS,JavaScript,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Yun's Blog</a></h3><div class="description"><p>程序猿一只，求打包带走.</p></div></div></div><ul class="social-links"><li><a href="http://github.com/ShujiaWu"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Redis配置</a></h3></div><div class="post-content"><h1 id="Redis配置"><a href="#Redis配置" class="headerlink" title="Redis配置"></a>Redis配置</h1><h2 id="通过修改配置文件修改配置"><a href="#通过修改配置文件修改配置" class="headerlink" title="通过修改配置文件修改配置"></a>通过修改配置文件修改配置</h2><blockquote>
+<p>配置文件以 <code>.cong</code> 结尾，可以直接修改配置文件来修改Redis的配置。</p>
+</blockquote>
+<h2 id="通过命令查询、修改"><a href="#通过命令查询、修改" class="headerlink" title="通过命令查询、修改"></a>通过命令查询、修改</h2><p>查询配置命令格式： <code>CONFIG GET CONFIG_SETTING_NAME</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查询loglevel的配置</span></div><div class="line"></div><div class="line">192.168.204.130:6379&gt; config get loglevel</div><div class="line">1) <span class="string">"loglevel"</span></div><div class="line">2) <span class="string">"notice"</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查询所有的配置</span></div><div class="line"></div><div class="line">192.168.204.130:6379&gt; config get *</div><div class="line">  1) <span class="string">"dbfilename"</span></div><div class="line">  2) <span class="string">"dump.rdb"</span></div><div class="line">  3) <span class="string">"requirepass"</span></div><div class="line">  4) <span class="string">""</span></div><div class="line">  5) <span class="string">"masterauth"</span></div><div class="line">  6) <span class="string">""</span></div><div class="line">  7) <span class="string">"unixsocket"</span></div><div class="line">  8) <span class="string">""</span></div><div class="line">  9) <span class="string">"logfile"</span></div><div class="line"> 10) <span class="string">"server_log.txt"</span></div><div class="line"> 11) <span class="string">"pidfile"</span></div><div class="line"> 12) <span class="string">""</span></div><div class="line"> 13) <span class="string">"maxmemory"</span></div><div class="line"> 14) <span class="string">"0"</span></div><div class="line"> ....</div></pre></td></tr></table></figure>
+<p>修改配置命令格式：<code>CONFIG SET CONFIG_SETTING_NAME NEW_CONFIG_VALUE</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 设置loglevel</span></div><div class="line"></div><div class="line">192.168.204.130:6379&gt; config <span class="built_in">set</span> loglevel <span class="string">"notice"</span></div><div class="line">OK</div></pre></td></tr></table></figure>
+<h2 id="常用配置说明"><a href="#常用配置说明" class="headerlink" title="常用配置说明"></a>常用配置说明</h2><table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>daemonize</td>
+<td>no</td>
+<td>Redis默认不是以守护进程的方式运行，可以通过该配置项修改，使用yes启用守护进程</td>
+</tr>
+<tr>
+<td>pidfile</td>
+<td>/var/run/redis.pid</td>
+<td>当Redis以守护进程方式运行时，Redis默认会把pid写入/var/run/redis.pid文件，可以通过pidfile指定</td>
+</tr>
+<tr>
+<td>port</td>
+<td>6379</td>
+<td>指定Redis监听端口，默认端口为6379</td>
+</tr>
+<tr>
+<td>bind</td>
+<td>127.0.0.1</td>
+<td>绑定的主机地址</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>300</td>
+<td>当客户端闲置多长时间后关闭连接，如果指定为0，表示关闭该功能</td>
+</tr>
+<tr>
+<td>loglevel</td>
+<td>verbose</td>
+<td>指定日志记录级别，Redis总共支持四个级别：debug、verbose、notice、warning，默认为verbose</td>
+</tr>
+<tr>
+<td>logfile</td>
+<td>stdout</td>
+<td>日志记录方式，默认为标准输出，如果配置Redis为守护进程方式运行，而这里又配置为日志记录方式为标准输出，则日志将会发送给/dev/null</td>
+</tr>
+<tr>
+<td>databases</td>
+<td>16</td>
+<td>设置数据库的数量，默认数据库为0，可以使用SELECT \<dbid\>命令在连接上指定数据库id</dbid\></td>
+</tr>
+<tr>
+<td>save</td>
+<td>\<seconds\> \<changes\></changes\></seconds\></td>
+<td>指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合。<br>Redis默认配置文件中提供了三个条件：<br>save 900 1 <br>save 300 10<br>save 60 10000 <br>分别表示:<br>900秒（15分钟）内有1个更改<br>300秒（5分钟）内有10个更改<br>60秒内有10000个更改</td>
+</tr>
+<tr>
+<td>rdbcompression</td>
+<td>yes</td>
+<td>指定存储至本地数据库时是否压缩数据，默认为yes，Redis采用LZF压缩，如果为了节省CPU时间，可以关闭该选项，但会导致数据库文件变的巨大</td>
+</tr>
+<tr>
+<td>dbfilename</td>
+<td>dump.rdb</td>
+<td>指定本地数据库文件名，默认值为dump.rdb</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>./</td>
+<td>指定本地数据库存放目录</td>
+</tr>
+<tr>
+<td>slaveof</td>
+<td>\<masterip\> \<masterport\></masterport\></masterip\></td>
+<td>设置当本机为slav服务时，设置master服务的IP地址及端口，在Redis启动时，它会自动从master进行数据同步</td>
+</tr>
+<tr>
+<td>masterauth</td>
+<td>\<master-password\></master-password\></td>
+<td>当master服务设置了密码保护时，slav服务连接master的密码</td>
+</tr>
+<tr>
+<td>requirepass</td>
+<td>yourpassword</td>
+<td>设置Redis连接密码，如果配置了连接密码，客户端在连接Redis时需要通过AUTH \<password\>命令提供密码，默认关闭(空)</password\></td>
+</tr>
+<tr>
+<td>maxclients</td>
+<td>128</td>
+<td>设置同一时间最大客户端连接数，默认无限制，Redis可以同时打开的客户端连接数为Redis进程可以打开的最大文件描述符数，如果设置 maxclients 0，表示不作限制。当客户端连接数到达限制时，Redis会关闭新的连接并向客户端返回max number of clients reached错误信息</td>
+</tr>
+<tr>
+<td>maxmemory</td>
+<td>\<bytes\></bytes\></td>
+<td>指定Redis最大内存限制，Redis在启动时会把数据加载到内存中，达到最大内存后，Redis会先尝试清除已到期或即将到期的Key，当此方法处理 后，仍然到达最大内存设置，将无法再进行写入操作，但仍然可以进行读取操作。Redis新的vm机制，会把Key存放内存，Value会存放在swap区</td>
+</tr>
+<tr>
+<td>appendonly</td>
+<td>no</td>
+<td>指定是否在每次更新操作后进行日志记录，Redis在默认情况下是异步的把数据写入磁盘，如果不开启，可能会在断电时导致一段时间内的数据丢失。因为 redis本身同步数据文件是按上面save条件来同步的，所以有的数据会在一段时间内只存在于内存中。默认为no</td>
+</tr>
+<tr>
+<td>appendfilename</td>
+<td>appendonly.aof</td>
+<td>指定更新日志文件名，默认为appendonly.aof</td>
+</tr>
+<tr>
+<td>appendfsync</td>
+<td>everysec</td>
+<td>指定更新日志条件，共有3个可选值：<br> no：表示等操作系统进行数据缓存同步到磁盘（快）<br>always：表示每次更新操作后手动调用fsync()将数据写到磁盘（慢，安全）<br>everysec：表示每秒同步一次（折衷，默认值）</td>
+</tr>
+<tr>
+<td>vm-enabled</td>
+<td>no</td>
+<td>指定是否启用虚拟内存机制，默认值为no，简单的介绍一下，VM机制将数据分页存放，由Redis将访问量较少的页即冷数据swap到磁盘上，访问多的页面由磁盘自动换出到内存中</td>
+</tr>
+<tr>
+<td>vm-swap-file</td>
+<td>/tmp/redis.swap</td>
+<td>虚拟内存文件路径，默认值为/tmp/redis.swap，不可多个Redis实例共享</td>
+</tr>
+<tr>
+<td>vm-max-memory</td>
+<td>0</td>
+<td>将所有大于vm-max-memory的数据存入虚拟内存,无论vm-max-memory设置多小,所有索引数据都是内存存储的(Redis的索引数据 就是keys),也就是说,当vm-max-memory设置为0的时候,其实是所有value都存在于磁盘。默认值为 0</td>
+</tr>
+<tr>
+<td>vm-page-size</td>
+<td>32</td>
+<td>Redis swap文件分成了很多的page，一个对象可以保存在多个page上面，但一个page上不能被多个对象共享，vm-page-size是要根据存储的数据大小来设定的，作者建议如果存储很多小对象，page大小最好设置为32或者64bytes；如果存储很大大对象，则可以使用更大的page，如果不确定，就使用默认值</td>
+</tr>
+<tr>
+<td>vm-pages</td>
+<td>134217728</td>
+<td>设置swap文件中的page数量，由于页表（一种表示页面空闲或使用的bitmap）是在放在内存中的，在磁盘上每8个pages将消耗1byte的内存</td>
+</tr>
+<tr>
+<td>vm-max-threads</td>
+<td>4</td>
+<td>设置访问swap文件的线程数,最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的，可能会造成比较长时间的延迟。默认值为4</td>
+</tr>
+<tr>
+<td> glueoutputbuf</td>
+<td>yes</td>
+<td>置在向客户端应答时，是否把较小的包合并为一个包发送，默认为开启</td>
+</tr>
+<tr>
+<td>hash-max-zipmap-entries<br>hash-max-zipmap-value</td>
+<td>64<br>512</td>
+<td>指定在超过一定的数量或者最大的元素超过某一临界值时，采用一种特殊的哈希算法</td>
+</tr>
+<tr>
+<td>activerehashing</td>
+<td>yes</td>
+<td>指定是否激活重置哈希，默认为开启</td>
+</tr>
+<tr>
+<td>include</td>
+<td>/path/to/local.conf</td>
+<td>指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>以上表格来自 <a href="http://www.runoob.com/redis/redis-conf.html" target="_blank" rel="external">www.runoob.com</a> ,仅做整理。</p>
+</blockquote>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2016-10-23</span><i class="fa fa-tag"></i><a href="/categories/redis/" title="redis" class="tag">redis </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.wushujia.cn/articles/redis/003.配置/,Yun's Blog,Redis配置,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/articles/redis/004.数据类型/" title="数据类型" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/articles/redis/002.配置远程访问/" title="Redis配置远程访问" class="btn">下一篇</a></li></ul></div><div id="container" style="padding:30px" class="container"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>(function() {
+    var gitment = new Gitment({
+        owner: 'ShujiaWu',
+        repo: 'ShujiaWu.github.io',
+        oauth: {
+            client_id: 'e87a36369b1bed79f408',
+            client_secret: '672bb0956ec56c2634d20fcb4a06b65ddabc6fae',
+        },
+    })
+    gitment.render('container')
+})();</script></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
