@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="shujia.wu,wushujia@vip.qq.com"><title>初始化npm、以及package说明 · Yun's Blog</title><meta name="description" content="【1】npm安装&amp;nbsp;&amp;nbsp;楼主使用的windows，所以直接安装NodeJS，NodeJS中有附带npm。直接到官网下载后一直无脑下一步(o゜▽゜)o☆
+【2】使用npm生成package.json文件1npm init
+&amp;nbsp;&amp;nbsp;然后根据提示填写信息。
+【3】packa"><meta name="keywords" content="Hexo,HTML,CSS,JS,JavaScript,Vue"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Yun's Blog</a></h3><div class="description"><p>程序猿一只，求打包带走.</p></div></div></div><ul class="social-links"><li><a href="http://github.com/https://github.com/ShujiaWu"><i class="fa fa-github"></i></a></li></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a onclick="window.history.go(-1)" class="fa fa-chevron-left"> </a></li></div><div class="avatar"><img src="/images/favicon.jpg"></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>初始化npm、以及package说明</a></h3></div><div class="post-content"><p>【1】npm安装<br>&nbsp;&nbsp;楼主使用的windows，所以直接安装NodeJS，NodeJS中有附带npm。直接到官网下载后一直无脑下一步(o゜▽゜)o☆</p>
+<p>【2】使用npm生成package.json文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;然后根据提示填写信息。</p>
+<p>【3】package.json文件说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;name&quot;: &quot;study-react&quot;,</div><div class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</div><div class="line">  &quot;description&quot;: &quot;this is a demo for react study&quot;,</div><div class="line">  &quot;main&quot;: &quot;index.js&quot;,</div><div class="line">  &quot;dependencies&quot;: &#123;</div><div class="line">    &quot;babel&quot;: &quot;^6.5.2&quot;,</div><div class="line">    &quot;babel-core&quot;: &quot;^6.16.0&quot;,</div><div class="line">    &quot;babel-loader&quot;: &quot;^6.2.5&quot;,</div><div class="line">    &quot;babel-preset-es2015&quot;: &quot;^6.16.0&quot;,</div><div class="line">    &quot;babel-preset-react&quot;: &quot;^6.16.0&quot;,</div><div class="line">    &quot;react-dom&quot;: &quot;^15.3.2&quot;,</div><div class="line">    &quot;react&quot;: &quot;^15.3.2&quot;,</div><div class="line">    &quot;webpack&quot;: &quot;^1.13.2&quot;,</div><div class="line">    &quot;webpack-dev-server&quot;: &quot;^1.16.1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;devDependencies&quot;: &#123;&#125;,</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;keywords&quot;: [</div><div class="line">    &quot;react&quot;,</div><div class="line">    &quot;study&quot;</div><div class="line">  ],</div><div class="line">  &quot;author&quot;: &quot;yun&quot;,</div><div class="line">  &quot;license&quot;: &quot;ISC&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>npm包的名称</td>
+</tr>
+<tr>
+<td>version</td>
+<td>版本号</td>
+</tr>
+<tr>
+<td>description</td>
+<td>描述</td>
+</tr>
+<tr>
+<td>main</td>
+<td>入口，指向程序的主要项目。就是说，如果你包的名字叫 express，然后用户安装它，然后require(“express”)。</td>
+</tr>
+<tr>
+<td>dependencies</td>
+<td>依赖项</td>
+</tr>
+<tr>
+<td>devDependencies</td>
+<td>开发依赖项</td>
+</tr>
+<tr>
+<td>scripts</td>
+<td>脚本</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>关键字</td>
+</tr>
+<tr>
+<td>author</td>
+<td>作者</td>
+</tr>
+<tr>
+<td>license</td>
+<td>协议</td>
+</tr>
+</tbody>
+</table>
+<p>其中<code>description</code>、<code>devDependencies</code>为工程的依赖包，<code>devDependencies</code>会下载文档和测试用例。</p>
+<p>【4】依赖项可以手动输入，然后使用 <code>npm install</code> 下载依赖项</p>
+<p>【5】使用 <code>npm install &lt;包名&gt; --save</code> 下载依赖包并添加到<code>description</code>中。</p>
+<p>【6】使用 <code>npm install &lt;包名&gt; --save-dev</code> 下载依赖包并添加到<code>devDependencies</code>中。</p>
+<hr>
+<p>相关连接：</p>
+<ul>
+<li><a href="https://www.npmjs.com/" target="_blank" rel="external">npm官网</a></li>
+<li><a href="https://docs.npmjs.com/getting-started/what-is-npm" target="_blank" rel="external">npm官方文档</a></li>
+<li><a href="https://nodejs.org" target="_blank" rel="external">NodeJS官网</a></li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2016-09-30</span><i class="fa fa-tag"></i><a href="/categories/npm/" title="npm" class="tag">npm </a></div></div></div></div><div class="share"><div class="evernote"><a href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank" class="fa fa-bookmark"></a></div><div class="weibo"><a href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));" class="fa fa-weibo"></a></div><div class="twitter"><a href="http://twitter.com/home?status=,http://blog.wushujia.cn/articles/npm/001-npm初始化/,Yun's Blog,初始化npm、以及package说明,;" class="fa fa-twitter"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a role="navigation" href="/articles/npm/002-npm常用命令/" title="npm常用命令" class="btn">上一篇</a></li><li class="next pagbuttons"><a role="navigation" href="/articles/hexo/001-Hexo常用命令/" title="Hexo常用命令" class="btn">下一篇</a></li></ul></div><div id="container"></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script src="/js/gitment.js"></script></body></html>
