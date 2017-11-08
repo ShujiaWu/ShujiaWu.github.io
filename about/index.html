@@ -2,11 +2,11 @@
 </div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2016-08-19</span></div></div></div></div><div id="container"></div><link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css"><script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script><script>(function() {
     alert('测试')
     var gitment = new Gitment({
-        owner: 'ShujiaWu',
-        repo: 'ShujiaWu.github.io',
+        owner: theme.gitment.owner,
+        repo: theme.gitment.repo,
         oauth: {
-            client_id: 'e87a36369b1bed79f408',
-            client_secret: '672bb0956ec56c2634d20fcb4a06b65ddabc6fae',
+            client_id: theme.gitment.client_id,
+            client_secret: theme.gitment.client_secret,
         },
     })
     gitment.render('container')
